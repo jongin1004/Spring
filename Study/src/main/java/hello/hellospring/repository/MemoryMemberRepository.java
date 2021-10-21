@@ -7,7 +7,6 @@ import java.util.*;
 
 //@Repository 어노테이션을 붙히는 이유는, @Autowired를 이용해서 스프링 컨테이너에 있는 클래스와 연결하고 싶은데, 아무 어노테이션도 붙어있지 않은
 //Java 클래스는 스프링에서 알 수가 없음. @Repository 있으면, 스프링 컨테이너가 스프링 컨테이너에서 관리할 수 있도록 등록합니다.
-@Repository
 public class MemoryMemberRepository  implements MemberRepository{
 
     private static Map<Long, Member> store = new HashMap<>();
