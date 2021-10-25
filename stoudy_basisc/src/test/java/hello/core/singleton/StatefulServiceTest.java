@@ -19,6 +19,9 @@ class StatefulServiceTest {
         StatefulService statefulService1 = ac.getBean(StatefulService.class);
         StatefulService statefulService2 = ac.getBean(StatefulService.class);
 
+        //싱글톤일 경우에는 사용자가 값을 변경할 수 있게 만들면 안된다.
+        //유저가 구매를 했을 때, 그 가격을 저장하게 하면, 다른 유저에게도 영향을 주기 때문이다.
+        // 그래서 싱글톤으로 개발을 할 때에는, 값을 읽어올 수 있게만 하는 것이 좋다.
         int UserA = statefulService1.order("item1", 10000);
         int UserB = statefulService1.order("item2", 20000);
 
