@@ -27,7 +27,7 @@ public class ApplicationContextBaiscFindTest {
         MemberService memberService = ac.getBean(MemberService.class);
         Assertions.assertThat(memberService).isInstanceOf(MemberService.class);
     }
-    
+
     @Test
     @DisplayName("빈 없는 이름으로 조회 ")
     void beanFindByName_x() {
