@@ -3,6 +3,10 @@ package hello.core.lifecycle;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 
+//javax 공식 패키지이기 때문에, spring이 아닌 곳에서도 사용 가능
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 public class NetworkClient{
 
     private String url;
@@ -29,12 +33,14 @@ public class NetworkClient{
         System.out.println("close: " + url);
     }
 
+    @PostConstruct
     public void init() {
         System.out.println("init");
         connect();
         call("초기화 연결 메시지");
     }
 
+    @PreDestroy
     public void close() {
         System.out.println("close");
         disconnect();
