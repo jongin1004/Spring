@@ -33,6 +33,8 @@ public class NetworkClient{
         System.out.println("close: " + url);
     }
 
+    //@PostConstruct와 @PreDestroy를 사용하는 것이 가장 좋다.
+    //하지만, 코드 수정이 불가능한 라이브러리를 사용할 때에는 사용이 불가능 ( 그때는 @Bean(initMethod = "init", destroyMethod = "close"))
     @PostConstruct
     public void init() {
         System.out.println("init");
