@@ -1,6 +1,7 @@
 package hello.core.scope;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.inject.Provider;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -44,7 +46,7 @@ public class PrototypeTest {
 
     @Test
     void singletonClientPrototype() {
-        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(ClientBean.class);
+        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(ClientBean.class, PrototypeBean.class);
 
         ClientBean clientBean1 = ac.getBean(ClientBean.class);
         int logic1 = clientBean1.logic();
@@ -52,28 +54,32 @@ public class PrototypeTest {
 
         ClientBean clientBean2 = ac.getBean(ClientBean.class);
         int logic2 = clientBean2.logic();
-        assertThat(logic2).isEqualTo(2);
+        assertThat(logic2).isEqualTo(1);
     }
 
     @Scope("singleton")
-    @ComponentScan
+//    @ComponentScan
     static class ClientBean {
-        private final PrototypeBean prototypeBean;
+//        private final PrototypeBean prototypeBean;
+        @Autowired private ObjectProvider<PrototypeBean> prototypeBeanProvider; // spring 라이브러리를 이용한 provider
+//        @Autowired private Provider<PrototypeBean> prototypeBeanProvider; // java표준을 이용한 provider
 
-        @Autowired
-        public ClientBean(PrototypeBean prototypeBean) {
-            this.prototypeBean = prototypeBean;
-        }
+//        @Autowired
+//        public ClientBean(PrototypeBean prototypeBean) {
+//            this.prototypeBean = prototypeBean;
+//        }
 
         public int logic() {
-            this.prototypeBean.addCount();
-            int count = this.prototypeBean.getCount();
+            PrototypeBean prototypeBean = prototypeBeanProvider.getObject();
+            //PrototypeBean prototypeBean = prototypeBeanProvider.getObject();
+            prototypeBean.addCount();
+            int count = prototypeBean.getCount();
             return count;
         }
     }
 
     @Scope("prototype")
-    @Component
+//    @Component
     static class PrototypeBean {
         private int count = 0;
 
@@ -87,7 +93,7 @@ public class PrototypeTest {
 
         @PostConstruct
         public void init() {
-            System.out.println("prototype.init");
+            System.out.println("prototype.init " + this);
         }
 
         @PreDestroy
