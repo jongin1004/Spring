@@ -12,7 +12,7 @@ public class MemberRepository {
     private static Map<Long, Member> store = new HashMap<>();
     private static Long sequence = 0L;
 
-    static MemberRepository getInstance() {
+    public static MemberRepository getInstance() {
         return instance;
     }
 
