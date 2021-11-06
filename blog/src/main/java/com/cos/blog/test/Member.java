@@ -1,5 +1,11 @@
 package com.cos.blog.test;
 
+import lombok.*;
+
+@Data //@Getter + @Setter
+//@RequiredArgsConstructor //final이 붙은 맴버변수를 매개변수로한 생성자 자동생성
+//@AllArgsConstructor //모든 맴버변수를 생성자로
+@NoArgsConstructor // 빈(매개변수가 없는) 생성자 생성
 public class Member {
 
     private int id;
@@ -7,42 +13,11 @@ public class Member {
     private String password;
     private String email;
 
+    @Builder
     public Member(int id, String name, String password, String email) {
         this.id = id;
         this.name = name;
         this.password = password;
         this.email = email;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getEmail() {
-        return email;
     }
 }
