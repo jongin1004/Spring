@@ -4,11 +4,16 @@ import com.cos.blog.model.RoleType;
 import com.cos.blog.model.User;
 import com.cos.blog.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
 
@@ -41,6 +46,20 @@ public class DumyControllerTest {
         // -> 웹 브라우저에서는 user객체를 이해하지 못함  -> 변환이 필요함 (JSON)
         //스프링부트는 MessageConvert가 자동으로 Jackson을 이용해서 JSON으로 변환해줌
         return user;
+    }
+
+    @GetMapping("/dummy/users")
+    public List<User> list() {
+        return userRepository.findAll();
+    }
+
+    //한 페이지당 2건의 데이터를 리턴 받음
+    @GetMapping("/dummy/user/page")
+    public List<User> pageList(@PageableDefault(size = 2, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+        Page<User> pagingUser = userRepository.findAll(pageable);
+        List<User> users = pagingUser.getContent();
+
+        return users;
     }
 
     // http://localhost:8000/blog/dummy/join
