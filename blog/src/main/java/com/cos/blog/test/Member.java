@@ -13,6 +13,7 @@ public class Member {
     private String password;
     private String email;
 
+    //Builder를 이용하면, 생성자를 오버로딩한 효과를 볼 수 있다.
     @Builder
     public Member(int id, String name, String password, String email) {
         this.id = id;
