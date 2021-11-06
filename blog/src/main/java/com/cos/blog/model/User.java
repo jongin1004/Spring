@@ -1,11 +1,19 @@
 package com.cos.blog.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity //이 User클래스를 테이블화 하기 위해서, 맴버변수를 MySQL 테이블의 속성값으로 매핑
 public class User {
 
