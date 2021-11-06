@@ -8,11 +8,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
@@ -60,6 +58,23 @@ public class DumyControllerTest {
         List<User> users = pagingUser.getContent();
 
         return users;
+    }
+
+    //@RequestBody = JSON데이터를 받을 경우에 필요함 (MasseageConvert의 Jackson라이브러리가 JSON을 객체로 만들어줌)
+    @Transactional
+    @PutMapping("/dummy/user/{id}")
+    public User updateUser(@PathVariable int id, @RequestBody User requestUser) {
+        System.out.println("id = " + id + ", requestUser.password = " + requestUser.getPassword());
+        System.out.println("id = " + id + ", requestUser.email = " + requestUser.getEmail());
+
+        User user = userRepository.findById(id).orElseThrow(() -> {
+            return new IllegalArgumentException("유저 없음");
+        });
+        user.setPassword(requestUser.getPassword());
+        user.setEmail(requestUser.getEmail());
+//        userRepository.save(user);
+
+        return null;
     }
 
     // http://localhost:8000/blog/dummy/join
