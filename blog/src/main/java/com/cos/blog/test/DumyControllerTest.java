@@ -73,6 +73,7 @@ public class DumyControllerTest {
     }
 
     //@RequestBody = JSON데이터를 받을 경우에 필요함 (MasseageConvert의 Jackson라이브러리가 JSON을 객체로 만들어줌)
+    //@RequestBody는 따라서, key=value값이 아닌 값을 받을 때는 꼭 필요한 것
     @Transactional // 변경있는 값만 UPDATE시켜라 (더티 체킹)
     @PutMapping("/dummy/user/{id}")
     public User updateUser(@PathVariable int id, @RequestBody User requestUser) {
