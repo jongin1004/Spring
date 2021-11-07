@@ -19,7 +19,7 @@ public class UserApiController {
     @PostMapping("/api/user")
     public ResponseDto<Integer> userSaveApi(@RequestBody User user) {
         user.setRole(RoleType.USER);
-        int result = userService.join(user);
-        return new ResponseDto<Integer>(HttpStatus.OK, result);
+        userService.join(user);
+        return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 }
