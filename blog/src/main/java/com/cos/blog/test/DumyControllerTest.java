@@ -4,6 +4,7 @@ import com.cos.blog.model.RoleType;
 import com.cos.blog.model.User;
 import com.cos.blog.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -20,6 +21,17 @@ public class DumyControllerTest {
 
     @Autowired //의존성 주입
     private UserRepository userRepository;
+
+    @DeleteMapping("/dummy/user/{id}")
+    public String delete(@PathVariable int id) {
+        try {
+            userRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            return "해당 ID("+id+")를 가진 유저는 존재하지 않습니다.";
+        }
+
+        return "삭제되었습니다 id :" + id;
+    }
 
     //람다식을 이용
 //    @GetMapping("/dummy/user/{id}")
@@ -61,7 +73,7 @@ public class DumyControllerTest {
     }
 
     //@RequestBody = JSON데이터를 받을 경우에 필요함 (MasseageConvert의 Jackson라이브러리가 JSON을 객체로 만들어줌)
-    @Transactional
+    @Transactional // 변경있는 값만 UPDATE시켜라 (더티 체킹)
     @PutMapping("/dummy/user/{id}")
     public User updateUser(@PathVariable int id, @RequestBody User requestUser) {
         System.out.println("id = " + id + ", requestUser.password = " + requestUser.getPassword());
@@ -74,7 +86,7 @@ public class DumyControllerTest {
         user.setEmail(requestUser.getEmail());
 //        userRepository.save(user);
 
-        return null;
+        return user;
     }
 
     // http://localhost:8000/blog/dummy/join
