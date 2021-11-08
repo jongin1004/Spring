@@ -25,15 +25,15 @@ public class UserApiController {
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 
-    @PostMapping("/api/user/login")
-    public ResponseDto<Integer> login(@RequestBody User user, HttpSession session) {
-        System.out.println("UserApiController : login호출");
-        User principal = userService.login(user); //principal = 접근주체
-
-        if(principal != null) {
-            session.setAttribute("principal", principal);
-        }
-
-        return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
-    }
+//    @PostMapping("/api/user/login")
+//    public ResponseDto<Integer> login(@RequestBody User user, HttpSession session) {
+//        System.out.println("UserApiController : login호출");
+//        User principal = userService.login(user); //principal = 접근주체
+//
+//        if(principal != null) {
+//            session.setAttribute("principal", principal);
+//        }
+//
+//        return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
+//    }
 }
