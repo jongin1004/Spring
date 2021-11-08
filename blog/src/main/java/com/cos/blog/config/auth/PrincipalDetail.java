@@ -13,6 +13,10 @@ public class PrincipalDetail implements UserDetails {
 
     private User user; //콤포지션 (상속으로 하는 것이 아닌 매개변수로 가지고 있는 것)
 
+    public PrincipalDetail(User user) {
+        this.user = user;
+    }
+
     @Override
     public String getPassword() {
         return user.getPassword();
