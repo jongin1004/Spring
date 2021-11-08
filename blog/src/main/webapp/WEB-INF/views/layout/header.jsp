@@ -14,36 +14,36 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/blog">Blog</a>
+    <a class="navbar-brand" href="/">Blog</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-
     <c:choose>
-        <c:when test="${empty sessionScope.principal}">
+         <c:when test = "${empty sessionScope.principal}">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                  <a class="nav-link" href="/blog/user/loginForm">로그인</a>
+                  <a class="nav-link" href="/loginForm">로그인</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/blog/user/joinForm">회원가입</a>
+                  <a class="nav-link" href="/joinForm">회원가입</a>
                 </li>
             </ul>
-        </c:when>
-        <c:otherwise>
+         </c:when>
+
+         <c:otherwise>
             <ul class="navbar-nav">
                 <li class="nav-item">
-                  <a class="nav-link" href="/blog/user/writeForm">글쓰기</a>
+                  <a class="nav-link" href="/board/form">글쓰기</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/blog/user/userForm">회원정보</a>
+                  <a class="nav-link" href="/user/form">회원정보</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/blog/user/logout">로그아웃</a>
+                  <a class="nav-link" href="/logout">로그아웃</a>
                 </li>
             </ul>
-        </c:otherwise>
+         </c:otherwise>
     </c:choose>
     </div>
   </div>

@@ -18,13 +18,13 @@
 
         $.ajax({
             type:"POST",
-            url:"/blog/api/user",
+            url:"/api/user",
             data:JSON.stringify(data),
             contentType:"application/json; charset=utf-8",
             dataType:"json"
         }).done(function(res) {
             alert("회원가입 성공");
-            location.href = "/blog";
+            location.href = "/";
         }).fail(function(error) {
             console.log(JSON.stringify(error));
         });
@@ -38,13 +38,13 @@
 
             $.ajax({
                 type:"POST",
-                url:"/blog/api/user/login",
+                url:"/api/user/login",
                 data:JSON.stringify(data),
                 contentType:"application/json; charset=utf-8",
                 dataType:"json"
             }).done(function(res) {
                 alert("로그인이 완료되었습니다.");
-                location.href = "/blog";
+                location.href = "/";
             }).fail(function(error) {
                 console.log(JSON.stringify(error));
             });
