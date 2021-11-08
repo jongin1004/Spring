@@ -27,8 +27,9 @@
           </div>
         </div>
       </div>
-      <button type="submit" class="btn btn-primary">로그인</button>
     </form>
+    <button id="btn-login" type="submit" class="btn btn-primary">로그인</button>
 </div>
 
+<script src="/blog/js/user.js" defer></script>
 <%@ include file="../layout/footer.jsp" %>

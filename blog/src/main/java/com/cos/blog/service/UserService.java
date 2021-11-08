@@ -4,8 +4,8 @@ import com.cos.blog.model.User;
 import com.cos.blog.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 
 // 컴포넌트 스캔을 통해서 Bean에 등록하도록
 @Service
@@ -19,5 +19,11 @@ public class UserService {
     public int join(User user) {
         userRepository.save(user);
         return 1;
+    }
+
+    //Select할 떄 트랙잭션 시작, 서비스 종료시에 트랜잭션 종료 (정합성 유지)
+    @org.springframework.transaction.annotation.Transactional(readOnly = true)
+    public User login(User user) {
+        return userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
     }
 }
