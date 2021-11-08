@@ -18,13 +18,13 @@ public class UserApiController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/api/user")
+    @PostMapping("/auth/joinProc")
     public ResponseDto<Integer> userSaveApi(@RequestBody User user) {
         user.setRole(RoleType.USER);
         userService.join(user);
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
-
+    //전통적인 방법
 //    @PostMapping("/api/user/login")
 //    public ResponseDto<Integer> login(@RequestBody User user, HttpSession session) {
 //        System.out.println("UserApiController : login호출");
@@ -36,4 +36,6 @@ public class UserApiController {
 //
 //        return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 //    }
+
+
 }

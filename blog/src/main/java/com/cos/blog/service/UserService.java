@@ -22,8 +22,8 @@ public class UserService {
     }
 
     //Select할 떄 트랙잭션 시작, 서비스 종료시에 트랜잭션 종료 (정합성 유지)
-    @org.springframework.transaction.annotation.Transactional(readOnly = true)
-    public User login(User user) {
-        return userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
-    }
+//    @org.springframework.transaction.annotation.Transactional(readOnly = true)
+//    public User login(User user) {
+//        return userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
+//    }
 }
