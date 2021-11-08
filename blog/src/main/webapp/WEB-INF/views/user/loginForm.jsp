@@ -2,7 +2,7 @@
 <%@ include file="../layout/header.jsp" %>
 
 <div class="container">
-    <form action="#" method="post">
+    <form action="/auth/loginProc" method="post">
       <div class="row mb-3">
         <label for="inputEmail3" class="col-sm-2 col-form-label">UserName</label>
         <div class="col-sm-10">

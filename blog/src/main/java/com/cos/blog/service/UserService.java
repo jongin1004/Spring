@@ -1,8 +1,10 @@
 package com.cos.blog.service;
 
+import com.cos.blog.model.RoleType;
 import com.cos.blog.model.User;
 import com.cos.blog.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,9 +16,16 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private BCryptPasswordEncoder encoder;
+
     //아래 함수를 하나의 트랜젝션으로 묻어서, 성공하면 commit을 실패하면 rollback을 하도록
     @Transactional
     public int join(User user) {
+        String rawPassword = user.getPassword();
+        String encPassword = encoder.encode(rawPassword);
+        user.setPassword(encPassword);
+        user.setRole(RoleType.USER);
         userRepository.save(user);
         return 1;
     }
