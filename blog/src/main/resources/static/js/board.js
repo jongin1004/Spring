@@ -7,8 +7,8 @@
 
     save: function() {
         let data = {
-            username: $("#title").val(),
-            password: $("#content").val(),
+            title: $("#title").val(),
+            content: $("#content").val(),
         }
 
         $.ajax({

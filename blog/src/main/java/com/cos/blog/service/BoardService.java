@@ -21,7 +21,9 @@ public class BoardService {
 
     //아래 함수를 하나의 트랜젝션으로 묻어서, 성공하면 commit을 실패하면 rollback을 하도록
     @Transactional
-    public void join(Board board) {
+    public void save(Board board, User user) {
+        board.setCount(0);
+        board.setUser(user);
         boardRepository.save(board);
     }
 }
