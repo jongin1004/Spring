@@ -7,7 +7,7 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">${board.title}</h5>
-            <a href="#" class="btn btn-primary">자세히 보기</a>
+            <a href="/board/${board.id}" class="btn btn-primary">자세히 보기</a>
           </div>
         </div>
     </c:forEach>

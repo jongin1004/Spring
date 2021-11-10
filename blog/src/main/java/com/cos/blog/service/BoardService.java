@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 
 import java.util.List;
 
@@ -33,5 +34,11 @@ public class BoardService {
 
     public Page<Board> boardList(Pageable pageable) {
         return boardRepository.findAll(pageable);
+    }
+
+    public Board showBoard(int id) {
+        return boardRepository.findById(id).orElseThrow(()->{
+           return new IllegalArgumentException("글 상세보기 실패: 아이디를 찾을 수 없습니다.");
+        });
     }
 }
