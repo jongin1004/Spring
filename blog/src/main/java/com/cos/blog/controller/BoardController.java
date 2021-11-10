@@ -10,8 +10,12 @@ public class BoardController {
 
     //WEB-INF/views/index.jsp
     @GetMapping({"", "/"})
-    public String index(@AuthenticationPrincipal PrincipalDetail principal) {
-        System.out.println("principal.username = " + principal.getUsername());
+    public String index() {
         return "index";
+    }
+
+    @GetMapping("/board/saveForm")
+    public String saveForm() {
+        return "board/saveForm";
     }
 }

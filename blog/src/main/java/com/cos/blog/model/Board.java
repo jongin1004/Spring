@@ -28,7 +28,7 @@ public class Board {
     @Lob //대용량 데이터
     private String content; //섬모노트 라이브러리 사용 <html>태그가 섞임
 
-    @ColumnDefault("0")
+    //@ColumnDefault("0")
     private int count;
 
     // Many = board, one = user -> 한 명의 유저는 여러개의 게시글을 가질 수 있다.
@@ -42,6 +42,7 @@ public class Board {
     //OneToMany일 경우에는 FetchType의 기본 값이 LAZY이기 때문에, 설정해줘야함
     @OneToMany(mappedBy = "board", fetch = FetchType.EAGER)
     private List<Reply> reply;
+
 
     @CreationTimestamp
     private Timestamp createDate;
