@@ -50,4 +50,15 @@ public class BoardService {
     public void deleteById(int id) {
         boardRepository.deleteById(id);
     }
+
+    @Transactional
+    public void update(int id, Board requestBoard) {
+        Board board = boardRepository.findById(id).orElseThrow(() -> {
+            return new IllegalArgumentException("글 찾기 실패: 아이디를 찾을 수 없습니다.");
+        });//영속화 완료
+
+        board.setTitle(requestBoard.getTitle());
+        board.setContent(requestBoard.getContent());
+        //해당 함수로 종료시(서비스가 종료될때) 트랜잭션이 종료됨. 이때 더티체킹(영속화되어있는 board의 데이트 값이 변경이 일어나서 -> 자동 업데이트)
+    }
 }

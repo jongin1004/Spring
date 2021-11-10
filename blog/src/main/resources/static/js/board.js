@@ -7,6 +7,10 @@
         $("#btn-delete").on("click", ()=>{
             this.deleteById();
         });
+
+        $("#btn-update").on("click", ()=>{
+            this.update();
+        });
     },
 
     save: function() {
@@ -39,6 +43,28 @@
         }).done(function(res) {
             alert("글삭제 성공");
             location.href = "/";
+        }).fail(function(error) {
+            console.log(JSON.stringify(error));
+        });
+    },
+
+    update: function() {
+        let id = $("#id").val();
+
+        let data = {
+            title: $("#title").val(),
+            content: $("#content").val()
+        }
+
+        $.ajax({
+            type:"PUT",
+            url:"/api/board/"+id,
+            data:JSON.stringify(data),
+            contentType:"application/json; charset=utf-8",
+            dataType:"json"
+        }).done(function(res) {
+            alert("글수정 성공");
+            location.href = "/board/"+id;
         }).fail(function(error) {
             console.log(JSON.stringify(error));
         });
