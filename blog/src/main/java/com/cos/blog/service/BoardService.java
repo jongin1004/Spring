@@ -10,6 +10,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 
 // 컴포넌트 스캔을 통해서 Bean에 등록하도록
 @Service
@@ -25,5 +27,9 @@ public class BoardService {
         board.setCount(0);
         board.setUser(user);
         boardRepository.save(board);
+    }
+
+    public List<Board> boardList() {
+        return boardRepository.findAll();
     }
 }
