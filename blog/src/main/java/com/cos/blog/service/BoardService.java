@@ -32,13 +32,22 @@ public class BoardService {
         boardRepository.save(board);
     }
 
+
+    @Transactional(readOnly = true) //select만 할때
     public Page<Board> boardList(Pageable pageable) {
         return boardRepository.findAll(pageable);
     }
 
+
+    @Transactional(readOnly = true) //select만 할때
     public Board showBoard(int id) {
         return boardRepository.findById(id).orElseThrow(()->{
            return new IllegalArgumentException("글 상세보기 실패: 아이디를 찾을 수 없습니다.");
         });
+    }
+
+    @Transactional
+    public void deleteById(int id) {
+        boardRepository.deleteById(id);
     }
 }

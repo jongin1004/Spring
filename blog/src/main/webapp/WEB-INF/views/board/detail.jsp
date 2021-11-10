@@ -4,8 +4,15 @@
 <div class="container">
   <button class="btn btn-secondary" onclick="history.back()">목록으로</button>
   <button id="btn-update" class="btn btn-warning">수정</button>
-  <button id="btn-delete" class="btn btn-danger">삭제</button>
+  <c:if test="${ board.user.id == principal.user.id}">
+    <button id="btn-delete" class="btn btn-danger">삭제</button>
+  </c:if>
   <br /><br />
+  <div>
+    글번호 : <span id="id"><i>${board.id}</i> </span>
+    작성자 : <span><i>${board.user.username} </i></span>
+  </div>
+  <br />
   <div class="row mb-3">
     <label for="title" class="col-sm-2 col-form-label">title</label>
     <div class="col-sm-10">
