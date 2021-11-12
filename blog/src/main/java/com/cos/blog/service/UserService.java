@@ -35,4 +35,15 @@ public class UserService {
 //    public User login(User user) {
 //        return userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
 //    }
+
+    @Transactional
+    public void update(User user) {
+        User persistance = userRepository.findById(user.getId()).orElseThrow(() -> {
+            return new IllegalArgumentException("해당 유저가 존재하지 않습니다.");
+        });
+        String rawPassword = user.getPassword();
+        String encPassword = encoder.encode(rawPassword);
+        persistance.setPassword(encPassword);
+        persistance.setEmail(user.getEmail());
+    }
 }

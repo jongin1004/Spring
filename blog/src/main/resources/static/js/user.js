@@ -3,9 +3,9 @@
         $("#btn-save").on("click", ()=>{
             this.save();
         });
-//        $("#btn-login").on("click", ()=>{
-//            this.login();
-//        });
+        $("#btn-update").on("click", ()=>{
+            this.update();
+        });
 
     },
 
@@ -30,25 +30,26 @@
         });
     },
 
-//    login: function() {
-//            let data = {
-//                username: $("#username").val(),
-//                password: $("#password").val(),
-//            }
-//
-//            $.ajax({
-//                type:"POST",
-//                url:"/api/user/login",
-//                data:JSON.stringify(data),
-//                contentType:"application/json; charset=utf-8",
-//                dataType:"json"
-//            }).done(function(res) {
-//                alert("로그인이 완료되었습니다.");
-//                location.href = "/";
-//            }).fail(function(error) {
-//                console.log(JSON.stringify(error));
-//            });
-//        }
+    update: function() {
+            let data = {
+                id: $("#id").val(),
+                email: $("#email").val(),
+                password: $("#password").val()
+            }
+
+            $.ajax({
+                type:"PUT",
+                url:"/user",
+                data:JSON.stringify(data),
+                contentType:"application/json; charset=utf-8",
+                dataType:"json"
+            }).done(function(res) {
+                alert("회원정보 수정완료.");
+                location.href = "/";
+            }).fail(function(error) {
+                console.log(JSON.stringify(error));
+            });
+        }
  }
 
 index.init();
