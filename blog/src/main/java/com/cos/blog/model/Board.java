@@ -1,5 +1,6 @@
 package com.cos.blog.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -41,7 +42,8 @@ public class Board {
     //fetch = FetchType.EAGER -> 무조건 다 땡겨와라! / EAGER이 아닌, LAZY는 필요할 때만 가져와라 라는 의미
     //OneToMany일 경우에는 FetchType의 기본 값이 LAZY이기 때문에, 설정해줘야함
     @OneToMany(mappedBy = "board", fetch = FetchType.EAGER)
-    private List<Reply> reply;
+    @JsonIgnoreProperties({"board"}) // 무한참조되는 것을 막기 위함
+    private List<Reply> replys;
 
 
     @CreationTimestamp
