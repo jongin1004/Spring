@@ -11,6 +11,10 @@
         $("#btn-update").on("click", ()=>{
             this.update();
         });
+
+        $("#btn-reply-save").on("click", ()=>{
+            this.replySave();
+        });
     },
 
     save: function() {
@@ -68,6 +72,32 @@
         }).fail(function(error) {
             console.log(JSON.stringify(error));
         });
+    },
+
+    save: function() {
+        let userId = $("#userId").val();
+        let boardId = $("#boardId").val();
+
+        let data = {
+            content: $("#reply-content").val()
+        }
+
+        console.log(userId);
+        console.log(boardId);
+        console.log(data);
+
+//        $.ajax({
+//            type:"POST",
+//            url:"/api/reply",
+//            data:JSON.stringify(data),
+//            contentType:"application/json; charset=utf-8",
+//            dataType:"json"
+//        }).done(function(res) {
+//            alert("댓글작성 성공");
+//            location.href = "/";
+//        }).fail(function(error) {
+//            console.log(JSON.stringify(error));
+//        });
     },
  }
 
