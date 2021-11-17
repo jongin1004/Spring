@@ -42,7 +42,6 @@
 
   <div class="card">
     <div class="card-header">댓글 리스트</div>
-
   </div>
 </div>
 
